@@ -1,0 +1,13 @@
+{% extends "catalog/layout.html" %}
+{% block title %}
+Compare DB SHA256
+{% endblock %}
+{% block content %}
+<h2>Compare</h2>
+<form method="POST" class="post-form">{% csrf_token %}    
+    <table border="1">
+    {{ form.as_table }}
+    </table>  
+    <button type="submit" class="save btn btn-default">Compare Release</button></td>
+</form>
+{% endblock %}

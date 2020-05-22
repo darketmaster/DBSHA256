@@ -1,0 +1,55 @@
+{% extends "catalog/layout.html" %}
+{% block title %}
+Comparison table result
+{% endblock %}
+{% block content %}
+<h2>Comparison table result</h2>
+{% comment %} <font size="1" face="Courier New" > {% endcomment %}
+{% for k,v in comparedata.items %}
+    <table width="100%" border="0">
+        <tr>
+            {% comment %} <th style="text-align:center" colspan="2">{{ k }} DATA</th> {% endcomment %}
+            <h2>{{ k }} DATA</h2>
+        </tr>
+        <td>            
+            {% for t,d in v.items %}
+                <table width="100%" border="1">
+                    <tr>
+                        {% if k == "REMOVED"  or k == "ADDED"%}
+                            <th style="text-align:center" colspan="2">{{ t }}</th>
+                        {% endif %}
+                        {% if k == "COMMON"%}
+                            <th style="text-align:center" colspan="4">{{ t }}</th>
+                        {% endif %}                         
+                    </tr>
+                    {% for key,values in d.items %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        {% if k == "REMOVED"  or k == "ADDED"%}
+                            <td>{{ values }}</td>
+                        {% endif %}
+                        {% if k == "COMMON"%}
+                            {% for v in values %}
+                                {% if v == True%}
+                                    <td BGCOLOR="#00FF00">Ok</td>
+                                {% else %}
+                                    {% if v == False%}
+                                        <td BGCOLOR="#FF0000">Fail</td>
+                                    {% else %}
+                                        <td >{{ v }}</td>
+                                    {% endif %}  
+                                {% endif %}                                
+                            {% endfor %}
+                        {% endif %}                        
+                    </tr>
+                    {% endfor %} 
+                </table>
+            {% endfor %}            
+        </td> 
+        <tr>
+        </tr>       
+    </table>
+{% comment %} </font> {% endcomment %}
+{% endfor %}
+
+{% endblock %}

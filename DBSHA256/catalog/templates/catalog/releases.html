@@ -1,0 +1,13 @@
+{% extends "catalog/layout.html" %}
+{% block title %}
+GENERATE DB SHA256
+{% endblock %}
+{% block content %}
+<h2>Generate DB SHA256</h2>
+<form method="POST" class="post-form">{% csrf_token %}    
+    <table border="1">
+    {{ form.as_table }}
+    </table>  
+    <button type="submit" class="save btn btn-default">Generate SHA256 for Release</button></td>
+</form>
+{% endblock %}

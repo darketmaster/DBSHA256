@@ -1,0 +1,18 @@
+{% extends "catalog/layout.html" %}
+{% block title %}
+TEST
+{% endblock %}
+{% block content %}
+<form action="/" method="post">
+    {% csrf_token %}
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <label>Release</label>
+    <select name="release" class="selectpicker" data-title="Select Release">
+    {% for x,y in form.fields.choice.choices %}
+       <option value="{{ x }}"{% if form.fields.choice.value == x %} selected{% endif %}>{{ y }}</option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="OK">
+</form>
+{% endblock %}

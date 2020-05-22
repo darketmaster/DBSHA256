@@ -8,7 +8,9 @@ class Release(models.Model):
     database = models.CharField(max_length=30)
     user = models.CharField(max_length=30) 
     password = models.CharField(max_length=30)
+    paramsFilter = models.TextField(default="version")
     created = models.DateTimeField(editable=False,default=timezone.now)
+    generated = models.DateTimeField(editable=False,blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -16,13 +18,10 @@ class Release(models.Model):
 class SHA256OP(models.Model):
     release = models.ForeignKey(Release, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    ptype = models.CharField(max_length=30)
+    ptype = models.CharField(max_length=30,default="PARAMETER")
     value = models.TextField()
     sha256 = models.TextField(default="NA")
     created = models.DateTimeField(editable=False,default=timezone.now)
 
-    def save(self):
-        self.save()
-
     def __str__(self):
-        return self.name
+        return self.release.name+";"+self.ptype+";"+self.name+";"+self.sha256
